@@ -2,9 +2,17 @@
 # -*- coding: utf-8 -*-
 import requests, sys, os
 
-listpath = sys.argv[1]
-outputpath = sys.argv[2]
-listcontent = open(listpath, "rb").read().decode("utf-8")
+try:
+    listpath = sys.argv[1]
+    outputpath = sys.argv[2]
+except:
+    sys.exit('Arguments should be <list.txt> and <output_folder>')
+
+try:
+    listcontent = open(listpath, "rb").read().decode("utf-8")
+except:
+    sys.exit('list of files does not exists')
+
 lines = listcontent.splitlines()
 
 for i, line in enumerate(lines):
@@ -19,4 +27,5 @@ for i, line in enumerate(lines):
         with open(os.path.join(outputpath, title), "wb") as f:
             f.write(r.content)
             print(title + " has been downloaded")
-
+    else:
+        print(title + " has been skipped")
