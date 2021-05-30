@@ -20,6 +20,8 @@ for i, line in enumerate(lines):
     if lines[i-1] != "" and not lines[i-1].startswith("http"):
         title = lines[i-1].replace("/", "-") + "." + line.split(".")[-1]
     else: title = line.split("/")[-1]
+    title = title.split("?")[0]
+    if title[0] == "-": title = "d" + title[1:]
     if (not os.path.exists(os.path.join(outputpath, title))) \
         or (os.path.exists(os.path.join(outputpath, title))
         and os.path.getsize(os.path.join(outputpath, title)) <= 16):
