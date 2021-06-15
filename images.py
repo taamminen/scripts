@@ -22,6 +22,7 @@ for root, dirs, files in os.walk(folder):
             new_filename = os.path.join(output_folder, file)
             img = Image.open(os.path.join(root, file))
             w, h = img.width, img.height
+            if w == max_size or h == max_size: continue
             if w > h:
                 neww = max_size
                 newh = int(max_size * h / w)
